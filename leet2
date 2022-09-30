@@ -1,0 +1,55 @@
+class Solution {
+public:
+    
+    vector<string> res;
+    
+    string letters(char x)
+    {
+        string two = "abc";
+        string three = "def";
+        string four = "ghi";
+        string five = "jkl";
+        string six = "mno";
+        string seven = "pqrs";
+        string eight = "tuv";
+        string nine = "wxyz";
+
+        if(x == '2') return two;
+        if(x == '3') return three;
+        if(x == '4') return four;
+        if(x == '5') return five;
+        if(x == '6') return six;
+        if(x == '7') return seven;
+        if(x == '8') return eight;
+        if(x == '9') return nine;
+        
+        return two;
+
+    }
+    
+    void solve(string &ip, string &op, int idx)
+    {
+        if(ip.size() == 0) return;
+        
+        if(op.size() == ip.size())
+        {
+            res.push_back(op);
+            return;
+        }
+        
+        string s = letters(ip[idx]);
+        
+        for(int i=0; i<s.size(); i++)
+        {
+            op.push_back(s[i]);
+            solve(ip, op, idx+1);
+            op.pop_back();
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        string ans;
+        solve(digits, ans, 0);
+        return res;
+    }
+};
